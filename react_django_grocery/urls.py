@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth', include('rest_framework.urls',
          namespace='rest_framework')),  # <- add
-    path('', include('users.urls'))  # <- add
+    path('', include('users.urls')),  # <- add
+    path('', include('restaurants.urls')) # <- add
 ]

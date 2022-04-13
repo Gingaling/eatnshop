@@ -1,10 +1,18 @@
-from djoser.serializers import GroceryCreateSerializer, GrocerySerializer
 from rest_framework import serializers
-from . import models
+from .models import Grocery
 
 
-class GroceryCreateSerializer(GroceryCreateSerializer):
-    class Meta(GroceryCreateSerializer.Meta):
-        model = models.Grocery
-        fields = ('name', 'owner', 'nowHave', 'unitMeasure',
-                  'eaten', 'purchased', 'img')
+class GrocerySerializer(serializers.HyperlinkedModelSerializer):
+    # reviews = serializers.HyperlinkedRelatedField(
+    #     view_name='review_detail',
+    #     many=True,
+    #     read_only=True
+    # )
+
+    grocery_url = serializers.ModelSerializer.serializer_url_field(
+        view_name='grocery_detail')
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Grocery
+        fields = ('name', 'owner', 'nowHave', 'unitMeasure', 'eaten', 'purchased', 'img')
