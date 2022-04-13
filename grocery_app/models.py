@@ -1,8 +1,7 @@
 from django.db import models
 
 # Create your models here.
-
-
+from django.db import models
 class Grocery(models.Model):
     name = models.CharField(max_length=200)
     owner = models.ForeignKey('users.User', related_name='grocery', on_delete=models.CASCADE)
